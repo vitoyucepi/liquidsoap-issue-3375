@@ -1,0 +1,11 @@
+services:
+  ls22:
+    image: savonet/liquidsoap:rolling-release-v2.2.x
+    command: /tmp/test/main.liq
+    volumes:
+      - ./:/tmp/test/
+  ls23:
+    image: savonet/liquidsoap:rolling-release-v2.3.x
+    command: /tmp/test/main.liq
+    volumes:
+      - ./:/tmp/test/

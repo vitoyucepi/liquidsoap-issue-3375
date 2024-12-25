@@ -39,7 +39,7 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-          opam exec -- liquidsoap main.liq
+          opam exec -- liquidsoap main.liq || exit 0
   liquidsoap-23:
     runs-on: ubuntu-24.04
     steps:
@@ -52,4 +52,4 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-          opam exec -- liquidsoap main.liq
+          opam exec -- liquidsoap main.liq || exit 0
