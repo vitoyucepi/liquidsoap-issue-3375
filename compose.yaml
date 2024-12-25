@@ -1,19 +1,19 @@
 services:
   ls20:
     image: savonet/liquidsoap:rolling-release-v2.0.x
-    command: /tmp/test/main.liq
+    command: /tmp/test/2.0.liq
     volumes:
   ls21:
     image: savonet/liquidsoap:rolling-release-v2.1.x
-    command: /tmp/test/main.liq
+    command: /tmp/test/2.0.liq
     volumes:
   ls22:
     image: savonet/liquidsoap:rolling-release-v2.2.x
-    command: /tmp/test/main.liq
+    command: /tmp/test/2.2.liq
     volumes:
       - ./:/tmp/test/
   ls23:
     image: savonet/liquidsoap:rolling-release-v2.3.x
-    command: /tmp/test/main.liq
+    command: /tmp/test/2.2.liq
     volumes:
       - ./:/tmp/test/

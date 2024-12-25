@@ -14,7 +14,7 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.0.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/main.liq || exit 0
+            liquidsoap /tmp/test/2.0.liq || exit 0
   liquidsoap-21-container:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.1.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/main.liq || exit 0
+            liquidsoap /tmp/test/2.0.liq || exit 0
   liquidsoap-22-container:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +34,7 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.2.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/main.liq || exit 0
+            liquidsoap /tmp/test/2.2.liq || exit 0
   liquidsoap-23-container:
     runs-on: ubuntu-latest 
     steps:
@@ -44,9 +44,9 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.3.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/main.liq || exit 0
+            liquidsoap /tmp/test/2.2.liq || exit 0
   liquidsoap-20:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
       - uses: ocaml/setup-ocaml@v3
@@ -57,7 +57,7 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap 'camomile<2.0.0'
-          opam exec -- liquidsoap main.liq || exit 0
+      - run: opam exec -- liquidsoap 2.0.liq || exit 0
   liquidsoap-21:
     runs-on: ubuntu-22.04
     steps:
@@ -70,7 +70,7 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-          opam exec -- liquidsoap main.liq || exit 0
+      - run: opam exec -- liquidsoap 2.0.liq || exit 0
   liquidsoap-22:
     runs-on: ubuntu-22.04
     steps:
@@ -83,7 +83,7 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-          opam exec -- liquidsoap main.liq || exit 0
+      - run: opam exec -- liquidsoap 2.2.liq || exit 0
   liquidsoap-23:
     runs-on: ubuntu-24.04
     steps:
@@ -96,4 +96,4 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-          opam exec -- liquidsoap main.liq || exit 0
+      - run: opam exec -- liquidsoap 2.2.liq || exit 0
