@@ -56,7 +56,7 @@ jobs:
           git clone https://github.com/savonet/liquidsoap -b rolling-release-v2.0.x --depth 1
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
-          opam install --yes liquidsoap
+          opam install --yes liquidsoap 'camomile<2.0.0'
           opam exec -- liquidsoap main.liq || exit 0
   liquidsoap-21:
     runs-on: ubuntu-22.04
