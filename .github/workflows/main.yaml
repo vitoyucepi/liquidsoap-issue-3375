@@ -38,5 +38,5 @@ jobs:
           git clone https://github.com/savonet/liquidsoap -b rolling-release-v2.2.x --depth 1
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
-          opam install --yes liquidsoap-core
+          opam install --yes liquidsoap
           liquidsoap main.liq
