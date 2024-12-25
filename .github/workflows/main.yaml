@@ -70,6 +70,7 @@ jobs:
         with:
           image: savonet/liquidsoap:rolling-release-v2.3.x
           options: -v ${{ github.workspace }}:/tmp/test
+          shell: bash
           run: |
             result="$(liquidsoap /tmp/test/2.2.liq)"
             status=$?
