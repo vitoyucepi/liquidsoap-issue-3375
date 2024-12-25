@@ -12,11 +12,10 @@ jobs:
       - uses: addnab/docker-run-action@v3
         with:
           image: savonet/liquidsoap:rolling-release-v2.2.x
-          options: -v ${{ github.workspace }}:/tmp
+          options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            whomai
-            ls -al
-            pwd
+            id
+            liquidsoap /tmp/test/main.liq
   liquidsoap-23:
     runs-on: ubuntu-latest
     container: 
@@ -25,8 +24,7 @@ jobs:
       - uses: addnab/docker-run-action@v3
         with:
           image: savonet/liquidsoap:rolling-release-v2.3.x
-          options: -v ${{ github.workspace }}:/tmp
+          options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            whomai
-            ls -al /tmp
-            pwd
+            id
+            liquidsoap /tmp/test/main.liq
