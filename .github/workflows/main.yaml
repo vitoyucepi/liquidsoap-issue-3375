@@ -14,7 +14,16 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.0.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/2.0.liq || exit 0
+            result="$(liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-21-container:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +33,16 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.1.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/2.0.liq || exit 0
+            result="$(liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-22-container:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +52,16 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.2.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/2.2.liq || exit 0
+            result="$(liquidsoap /tmp/test/2.2.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-23-container:
     runs-on: ubuntu-latest 
     steps:
@@ -44,7 +71,16 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.3.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            liquidsoap /tmp/test/2.2.liq || exit 0
+            result="$(liquidsoap /tmp/test/2.2.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-20:
     runs-on: ubuntu-20.04
     steps:
@@ -57,7 +93,17 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap 'camomile<2.0.0'
-      - run: opam exec -- liquidsoap 2.0.liq || exit 0
+      - run: |
+            result="$(opam exec -- liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-21:
     runs-on: ubuntu-22.04
     steps:
@@ -70,7 +116,17 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-      - run: opam exec -- liquidsoap 2.0.liq || exit 0
+      - run: |
+            result="$(opam exec -- liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-22:
     runs-on: ubuntu-22.04
     steps:
@@ -83,7 +139,17 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-      - run: opam exec -- liquidsoap 2.2.liq || exit 0
+      - run: |
+            result="$(opam exec -- liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
   liquidsoap-23:
     runs-on: ubuntu-24.04
     steps:
@@ -96,4 +162,14 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-      - run: opam exec -- liquidsoap 2.2.liq || exit 0
+      - run: |
+            result="$(opam exec -- liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            if echo "$result" | grep -q "nothing to do"; then
+              status=0
+            fi
+            if echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
