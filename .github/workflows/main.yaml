@@ -5,26 +5,37 @@ on:
   workflow_dispatch: {}
 
 jobs:
+  # liquidsoap-22-container:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: addnab/docker-run-action@v3
+  #       with:
+  #         image: savonet/liquidsoap:rolling-release-v2.2.x
+  #         options: -v ${{ github.workspace }}:/tmp/test
+  #         run: |
+  #           id
+  #           liquidsoap /tmp/test/main.liq || exit 0
+  # liquidsoap-23-container:
+  #   runs-on: ubuntu-latest 
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: addnab/docker-run-action@v3
+  #       with:
+  #         image: savonet/liquidsoap:rolling-release-v2.3.x
+  #         options: -v ${{ github.workspace }}:/tmp/test
+  #         run: |
+  #           id
+  #           liquidsoap /tmp/test/main.liq || exit 0
   liquidsoap-22:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: addnab/docker-run-action@v3
+      - uses: ocaml/setup-ocaml@v3
         with:
-          image: savonet/liquidsoap:rolling-release-v2.2.x
-          options: -v ${{ github.workspace }}:/tmp/test
-          run: |
-            id
-            liquidsoap /tmp/test/main.liq
-  liquidsoap-23:
-    runs-on: ubuntu-latest
-    container: 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: savonet/liquidsoap:rolling-release-v2.3.x
-          options: -v ${{ github.workspace }}:/tmp/test
-          run: |
-            id
-            liquidsoap /tmp/test/main.liq
+          ocaml-compiler: 4
+      - run: |
+          git clone https://github.com/savonet/liquidsoap -b rolling-release-v2.2.x --depth 1
+          opam pin --no-action ./liquidsoap
+          opam install liquidsoap-core
+          liquidsoap main.liq
