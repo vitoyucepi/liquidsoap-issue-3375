@@ -9,18 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: docker://savonet/liquidsoap:rolling-release-v2.3.x
-        run: |
-          whomai
-          ls -al
-          pwd
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.2.x
+          options: -v ${{ github.workspace }}:/tmp
+          run: |
+            whomai
+            ls -al
+            pwd
   liquidsoap-2.3.x:
     runs-on: ubuntu-latest
     container: 
     steps:
       - uses: actions/checkout@v4
-      - uses: docker://savonet/liquidsoap:rolling-release-v2.3.x
-        run: |
-          whomai
-          ls -al
-          pwd
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.3.x
+          options: -v ${{ github.workspace }}:/tmp
+          run: |
+            whomai
+            ls -al /tmp
+            pwd
