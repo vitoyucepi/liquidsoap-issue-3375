@@ -5,72 +5,56 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  # liquidsoap-20-container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: addnab/docker-run-action@v3
-  #       with:
-  #         image: savonet/liquidsoap:rolling-release-v2.0.x
-  #         options: -v ${{ github.workspace }}:/tmp/test
-  #         run: |
-  #           result="$(liquidsoap /tmp/test/2.0.liq)"
-  #           status=$?
-  #           if echo "$result" | grep -q "nothing to do"; then
-  #             status=0
-  #           fi
-  #           if echo "$result" | grep -q "deprecated"; then
-  #             echo "Expected deprecated warning"
-  #             status=1
-  #           fi
-  #           exit "$status"
-  # liquidsoap-21-container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: addnab/docker-run-action@v3
-  #       with:
-  #         image: savonet/liquidsoap:rolling-release-v2.1.x
-  #         options: -v ${{ github.workspace }}:/tmp/test
-  #         run: |
-  #           result="$(liquidsoap /tmp/test/2.0.liq)"
-  #           status=$?
-  #           if echo "$result" | grep -q "nothing to do"; then
-  #             status=0
-  #           fi
-  #           if echo "$result" | grep -q "deprecated"; then
-  #             echo "Expected deprecated warning"
-  #             status=1
-  #           fi
-  #           exit "$status"
-  # liquidsoap-22-container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: addnab/docker-run-action@v3
-  #       with:
-  #         image: savonet/liquidsoap:rolling-release-v2.2.x
-  #         options: -v ${{ github.workspace }}:/tmp/test
-  #         run: |
-  #           result="$(liquidsoap /tmp/test/2.2.liq)"
-  #           status=$?
-  #           if echo "$result" | grep -q "nothing to do"; then
-  #             status=0
-  #           fi
-  #           if echo "$result" | grep -q "deprecated"; then
-  #             echo "Expected deprecated warning"
-  #             status=1
-  #           fi
-  #           exit "$status"
-  liquidsoap-23-container:
-    runs-on: ubuntu-latest 
+  liquidsoap-20-container:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: addnab/docker-run-action@v3
         with:
-          image: savonet/liquidsoap:rolling-release-v2.3.x
+          image: savonet/liquidsoap:rolling-release-v2.0.x
           options: -v ${{ github.workspace }}:/tmp/test
-          shell: bash
+          run: |
+            result="$(liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            echo "$result"
+            if echo "$result" | grep -q "nothing to do"; then
+              echo "Nothing to do is fine"
+              status=0
+            fi
+            if ! echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
+  liquidsoap-21-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.1.x
+          options: -v ${{ github.workspace }}:/tmp/test
+          run: |
+            result="$(liquidsoap /tmp/test/2.0.liq)"
+            status=$?
+            echo "$result"
+            if echo "$result" | grep -q "nothing to do"; then
+              echo "Nothing to do is fine"
+              status=0
+            fi
+            if ! echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
+            exit "$status"
+  liquidsoap-22-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.2.x
+          options: -v ${{ github.workspace }}:/tmp/test
           run: |
             result="$(liquidsoap /tmp/test/2.2.liq)"
             status=$?
@@ -82,7 +66,28 @@ jobs:
             if ! echo "$result" | grep -q "deprecated"; then
               echo "Expected deprecated warning"
               status=1
-              fi
+            fi
+            exit "$status"
+  liquidsoap-23-container:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.3.x
+          options: -v ${{ github.workspace }}:/tmp/test
+          run: |
+            result="$(liquidsoap /tmp/test/2.2.liq)"
+            status=$?
+            echo "$result"
+            if echo "$result" | grep -q "nothing to do"; then
+              echo "Nothing to do is fine"
+              status=0
+            fi
+            if ! echo "$result" | grep -q "deprecated"; then
+              echo "Expected deprecated warning"
+              status=1
+            fi
             exit "$status"
   # liquidsoap-20:
   #   runs-on: ubuntu-20.04
