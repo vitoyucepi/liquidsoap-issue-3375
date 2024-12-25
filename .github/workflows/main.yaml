@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  push: {}
+  workflow_dispatch: {}
+
+jobs:
+  liquidsoap-2.2.x:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://savonet/liquidsoap:rolling-release-v2.3.x
+        run: |
+          whomai
+          ls -al
+          pwd
+  liquidsoap-2.3.x:
+    runs-on: ubuntu-latest
+    container: 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://savonet/liquidsoap:rolling-release-v2.3.x
+        run: |
+          whomai
+          ls -al
+          pwd
