@@ -5,28 +5,28 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  # liquidsoap-22-container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: addnab/docker-run-action@v3
-  #       with:
-  #         image: savonet/liquidsoap:rolling-release-v2.2.x
-  #         options: -v ${{ github.workspace }}:/tmp/test
-  #         run: |
-  #           id
-  #           liquidsoap /tmp/test/main.liq || exit 0
-  # liquidsoap-23-container:
-  #   runs-on: ubuntu-latest 
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: addnab/docker-run-action@v3
-  #       with:
-  #         image: savonet/liquidsoap:rolling-release-v2.3.x
-  #         options: -v ${{ github.workspace }}:/tmp/test
-  #         run: |
-  #           id
-  #           liquidsoap /tmp/test/main.liq || exit 0
+  liquidsoap-22-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.2.x
+          options: -v ${{ github.workspace }}:/tmp/test
+          run: |
+            id
+            liquidsoap /tmp/test/main.liq || exit 0
+  liquidsoap-23-container:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: savonet/liquidsoap:rolling-release-v2.3.x
+          options: -v ${{ github.workspace }}:/tmp/test
+          run: |
+            id
+            liquidsoap /tmp/test/main.liq || exit 0
   liquidsoap-22:
     runs-on: ubuntu-22.04
     steps:
@@ -39,4 +39,17 @@ jobs:
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
           opam install --yes liquidsoap
-          liquidsoap main.liq
+          opam exec -- liquidsoap main.liq
+  liquidsoap-23:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 4
+      - run: |
+          git clone https://github.com/savonet/liquidsoap -b rolling-release-v2.3.x --depth 1
+          opam pin --no-action --yes ./liquidsoap
+          sudo apt-get update
+          opam install --yes liquidsoap
+          opam exec -- liquidsoap main.liq
