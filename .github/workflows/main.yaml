@@ -72,15 +72,17 @@ jobs:
           options: -v ${{ github.workspace }}:/tmp/test
           shell: bash
           run: |
-            result="$(liquidsoap /tmp/test/2.2.liq)"
+            result="$(liquidsoap main.liq)"
             status=$?
+            echo "$result"
             if echo "$result" | grep -q "nothing to do"; then
+              echo "Nothing to do is fine"
               status=0
             fi
-            if echo "$result" | grep -q "deprecated"; then
+            if ! echo "$result" | grep -q "deprecated"; then
               echo "Expected deprecated warning"
               status=1
-            fi
+              fi
             exit "$status"
   # liquidsoap-20:
   #   runs-on: ubuntu-20.04
