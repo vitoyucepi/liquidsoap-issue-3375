@@ -14,7 +14,6 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.2.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            id
             liquidsoap /tmp/test/main.liq || exit 0
   liquidsoap-23-container:
     runs-on: ubuntu-latest 
@@ -25,7 +24,6 @@ jobs:
           image: savonet/liquidsoap:rolling-release-v2.3.x
           options: -v ${{ github.workspace }}:/tmp/test
           run: |
-            id
             liquidsoap /tmp/test/main.liq || exit 0
   liquidsoap-22:
     runs-on: ubuntu-22.04
