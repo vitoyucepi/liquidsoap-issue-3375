@@ -177,6 +177,6 @@ jobs:
           sudo apt-get update
           opam install --yes liquidsoap
       - run: |
-          result="$(opam exec -- liquidsoap /tmp/test/2.2.liq)"
-          status=$?
+          result="$(opam exec -- liquidsoap /tmp/test/2.2.liq || status=$?)"
           echo "$result"
+          echo "$status"
