@@ -140,7 +140,7 @@ jobs:
           sudo apt-get update
           opam install --yes liquidsoap
       - run: |
-            result="$(opam exec -- liquidsoap /tmp/test/2.0.liq)"
+            result="$(opam exec -- liquidsoap /tmp/test/2.2.liq)"
             status=$?
             if echo "$result" | grep -q "nothing to do"; then
               status=0
@@ -163,7 +163,7 @@ jobs:
           sudo apt-get update
           opam install --yes liquidsoap
       - run: |
-            result="$(opam exec -- liquidsoap /tmp/test/2.0.liq)"
+            result="$(opam exec -- liquidsoap /tmp/test/2.2.liq)"
             status=$?
             if echo "$result" | grep -q "nothing to do"; then
               status=0
