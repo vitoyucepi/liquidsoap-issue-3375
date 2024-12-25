@@ -5,7 +5,7 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  liquidsoap-2.2.x:
+  liquidsoap-22:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +17,7 @@ jobs:
             whomai
             ls -al
             pwd
-  liquidsoap-2.3.x:
+  liquidsoap-23:
     runs-on: ubuntu-latest
     container: 
     steps:
