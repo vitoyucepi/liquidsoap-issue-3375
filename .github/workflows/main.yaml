@@ -72,7 +72,7 @@ jobs:
           options: -v ${{ github.workspace }}:/tmp/test
           shell: bash
           run: |
-            result="$(liquidsoap main.liq)"
+            result="$(liquidsoap /tmp/test/2.2.liq)"
             status=$?
             echo "$result"
             if echo "$result" | grep -q "nothing to do"; then
