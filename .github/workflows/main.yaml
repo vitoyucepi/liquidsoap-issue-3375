@@ -100,7 +100,7 @@ jobs:
           git clone https://github.com/savonet/liquidsoap -b rolling-release-v2.0.x --depth 1
           opam pin --no-action --yes ./liquidsoap
           sudo apt-get update
-          opam install --yes liquidsoap 'camomile=1.0.2' 'pcre=7.5.0' 'mm=0.8.0' 'dtools=0.4.4' 'duppy=0.9.1' 'sedlex=2.3'
+          opam install --yes liquidsoap 'camomile<2.0.0'
       - run: |
           result="$(opam exec -- liquidsoap 2.0.liq || status=1)"
           echo "$result"
